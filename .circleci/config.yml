@@ -1,0 +1,24 @@
+version: 2.1
+orbs:
+  git-shallow-clone: guitarrapc/git-shallow-clone@0.2.0
+executors:
+  dotnet:
+    docker:
+      - image: mcr.microsoft.com/dotnet/core/sdk:3.1
+    environment:
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+      NUGET_XMLDOC_MODE: skip
+jobs:
+  build-test:
+    executor: dotnet
+    steps:
+      - git-shallow-clone/checkout_shallow
+
+workflows:
+  version: 2
+  build-and-push:
+    jobs:
+      - build-test:
+          filters:
+            tags:
+              only: /.*/
