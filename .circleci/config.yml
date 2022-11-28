@@ -12,7 +12,7 @@ jobs:
     docker:
       - image: cimg/base:stable
     steps:
-      - git-shallow-clone/checkout
+      - git-shallow-clone/checkout_advanced
       - run: echo "this is the test job"
 
 workflows:
