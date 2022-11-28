@@ -1,17 +1,22 @@
 version: 2.1
 orbs:
   git-shallow-clone: guitarrapc/git-shallow-clone@2.4.0
-executors:
-  image: cimg/base:stable
 jobs:
-  checkout:
+  build:
+    docker:
+      - image: cimg/base:stable
     steps:
-      - git-shallow-clone/checkout_shallow
+      - git-shallow-clone/checkout
+      - run: echo "this is the build job"
+  test:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - git-shallow-clone/checkout
+      - run: echo "this is the test job"
 
 workflows:
-  build:
+  build_and_test:
     jobs:
-      - checkout:
-          filters:
-            tags:
-              only: /.*/
+      - build
+      - test
