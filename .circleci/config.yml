@@ -7,7 +7,9 @@ jobs:
       - image: cimg/base:stable
     steps:
       - git-shallow-clone/checkout
+      - run: git submodule update --init --recursive
       - run: echo "this is the build job"
+      - run: git submodule status --recursive
   test:
     docker:
       - image: cimg/base:stable
