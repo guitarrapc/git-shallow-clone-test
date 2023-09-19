@@ -3,6 +3,14 @@ orbs:
   # git-shallow-clone: guitarrapc/git-shallow-clone@dev:alpha
   git-shallow-clone: guitarrapc/git-shallow-clone@2.7.1
 jobs:
+  normal:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run: git submodule update --init --recursive
+      - run: echo "this is the build job"
+      - run: git submodule status --recursive
   checkout:
     docker:
       - image: cimg/base:stable
@@ -24,5 +32,6 @@ jobs:
 workflows:
   build_and_test:
     jobs:
+      - normal
       - checkout
       - checkout_advanced
