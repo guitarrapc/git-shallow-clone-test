@@ -11,7 +11,7 @@ jobs:
       - run: echo "this is the build job"
       - run: git submodule status --recursive
 
-  advanced_checkout:
+  checkout_advanced:
     docker:
       - image: cimg/base:stable
     steps:
@@ -23,5 +23,5 @@ jobs:
 workflows:
   build_and_test:
     jobs:
-      - build
-      - test
+      - checkout
+      - checkout_advanced
